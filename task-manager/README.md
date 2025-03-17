@@ -8,7 +8,6 @@ This Task Manager application is built using Golang, PostgreSQL, and GORM ORM.
 - JWT-based Authentication
 - Task Management (Create, Read, Update, Delete)
 - Pagination support for listing tasks
-- Following SOLID principles and ACID transactions
 - Dockerized for easy deployment
 
 ## Project Structure

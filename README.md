@@ -116,14 +116,14 @@ FROM users;
    CREATE INDEX idx_gin ON documents USING gin (content);
    ```
 
-5. **BRIN (Block Range INdex):**
+5. **BRIN (Block Range Index):**
    - Cho bảng rất lớn, dữ liệu sắp xếp theo thứ tự tự nhiên.
 
    ```sql
    CREATE INDEX idx_brin ON large_table USING brin (column);
    ```
 
-6. **Index trên nhiều cột**
+6. **Index trên nhiều cột:**
 
     - Tạo index trên nhiều cột để tối ưu các truy vấn phức tạp.
 
@@ -131,7 +131,7 @@ FROM users;
   CREATE INDEX idx_user_name_email ON users(name, email);
   ```
 
-7. **Unique Index**
+7. **Unique Index:**
 
     - Đảm bảo giá trị trong cột là duy nhất.
 

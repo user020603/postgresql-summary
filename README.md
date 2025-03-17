@@ -83,6 +83,9 @@ FROM users;
 
 ## Index
 
+- **Index** là cấu trúc dữ liệu giúp tăng tốc độ truy vấn dữ liệu trong bảng.
+- **Mục đích:** Tăng hiệu suất truy vấn SELECT, UPDATE và DELETE.
+
 ```sql
 -- B-tree index (mặc định)
 CREATE INDEX idx_user_email ON users(email);

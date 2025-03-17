@@ -43,8 +43,8 @@ task-manager/
 ### 1. Clone the repository
 
 ```sh
-git clone https://github.com/user020603/postgresql.git
-cd postgresql/task-manager
+git clone https://github.com/user020603/postgresql-summary.git
+cd postgresql-summary/task-manager
 ```
 
 ### 2. Set up the environment variables

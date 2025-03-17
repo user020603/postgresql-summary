@@ -86,24 +86,60 @@ FROM users;
 - **Index** là cấu trúc dữ liệu giúp tăng tốc độ truy vấn dữ liệu trong bảng.
 - **Mục đích:** Tăng hiệu suất truy vấn SELECT, UPDATE và DELETE.
 
-```sql
--- B-tree index (mặc định)
-CREATE INDEX idx_user_email ON users(email);
+## Các loại Index
 
--- Nhiều cột
-CREATE INDEX idx_user_name_email ON users(name, email);
+1. **B-tree (mặc định):**
+   - Tìm kiếm, chèn, cập nhật nhanh.
+   - Phù hợp với các phép so sánh `=`, `<`, `>`, `<=`, `>=`.
 
--- Unique index
-CREATE UNIQUE INDEX idx_unique_email ON users(email);
+   ```sql
+   CREATE INDEX idx_user_email ON users(email);
+   ```
 
--- Partial index
-CREATE INDEX idx_active_users ON users(last_login) WHERE active = TRUE;
-```
+2. **Hash:**
+   - Tìm kiếm `=` nhanh.
+   - Không hỗ trợ cho các phép so sánh phạm vi.
 
-**Loại index đặc biệt:**
-- GiST (Generalized Search Tree): cho dữ liệu không có thứ tự tự nhiên
-- GIN (Generalized Inverted Index): cho các mảng, full-text search
-- BRIN (Block Range INdex): cho dữ liệu được sắp xếp tự nhiên
+   ```sql
+   CREATE INDEX idx_user_email_hash ON users USING hash (email);
+   ```
+
+3. **GiST (Generalized Search Tree):**
+   - Dùng cho các kiểu dữ liệu phức tạp như hình học, toàn văn.
+
+   ```sql
+   CREATE INDEX idx_geom ON geom_table USING gist (geom);
+   ```
+
+4. **GIN (Generalized Inverted Index):**
+   - Tìm kiếm toàn văn, mảng, JSONB.
+
+   ```sql
+   CREATE INDEX idx_gin ON documents USING gin (content);
+   ```
+
+5. **BRIN (Block Range INdex):**
+   - Cho bảng rất lớn, dữ liệu sắp xếp theo thứ tự tự nhiên.
+
+   ```sql
+   CREATE INDEX idx_brin ON large_table USING brin (column);
+   ```
+
+## Index trên nhiều cột
+
+- Tạo index trên nhiều cột để tối ưu các truy vấn phức tạp.
+
+  ```sql
+  CREATE INDEX idx_user_name_email ON users(name, email);
+  ```
+
+### Unique Index
+
+- Đảm bảo giá trị trong cột là duy nhất.
+
+  ```sql
+  CREATE UNIQUE INDEX idx_unique_email ON users(email);
+  ``
 
 ## Partition
 
@@ -164,8 +200,3 @@ COMMIT;
 - **Mô tả:** Đảm bảo tính tuần tự tuyệt đối, như thể các transaction được thực hiện lần lượt.
 - **Ưu điểm:** Tránh được mọi vấn đề về concurrent data (dirty read, non-repeatable read, phantom read).
 - **Nhược điểm:** Hiệu suất thấp nhất, dễ gặp deadlock.
-
-**Ưu điểm:**
-- Hỗ trợ đầy đủ ACID
-- Two-phase commit cho giao dịch phân tán
-- Xử lý đồng thời tốt với MVCC (Multiversion Concurrency Control)

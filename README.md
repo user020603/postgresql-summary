@@ -86,8 +86,6 @@ FROM users;
 - **Index** là cấu trúc dữ liệu giúp tăng tốc độ truy vấn dữ liệu trong bảng.
 - **Mục đích:** Tăng hiệu suất truy vấn SELECT, UPDATE và DELETE.
 
-## Các loại Index
-
 1. **B-tree (mặc định):**
    - Tìm kiếm, chèn, cập nhật nhanh.
    - Phù hợp với các phép so sánh `=`, `<`, `>`, `<=`, `>=`.

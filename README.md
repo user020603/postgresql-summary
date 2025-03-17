@@ -123,7 +123,7 @@ FROM users;
    CREATE INDEX idx_brin ON large_table USING brin (column);
    ```
 
-- Index trên nhiều cột
+6. **Index trên nhiều cột**
 
     - Tạo index trên nhiều cột để tối ưu các truy vấn phức tạp.
 
@@ -131,13 +131,13 @@ FROM users;
   CREATE INDEX idx_user_name_email ON users(name, email);
   ```
 
-- Unique Index
+7. **Unique Index**
 
     - Đảm bảo giá trị trong cột là duy nhất.
 
   ```sql
   CREATE UNIQUE INDEX idx_unique_email ON users(email);
-  ``
+  ```
 
 ## Partition
 
